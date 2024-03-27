@@ -80,17 +80,22 @@
       </div>
     </div>
   </main>
-  <table>
-    <tbody>
-      {% for row in csvlist %}
-        <tr>
-          {% for element in row %}
-            <td>{{ element }}</td> 
+
+  <div class="card-group">
+    {% for column in range(4, 12) %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{csvlist[0][column]}}</h5>
+          {% for i in range(1, csvlist|length) %}
+            <div class="card-text">
+              <td>{{csvlist[i][column]}}</td>
+            </div>
           {% endfor %}
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h3">Load average</h1>

@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Análisis de Incidentes</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/bootstrap.min.css') }}">
+  <!-- link rel="stylesheet" type="text/css" href="templates/bootstrap.min.css" -->
+</head>
+<body>
+  <table>
+    <tbody>
+      {% for row in csvlist %}
+        <tr>
+          {% for element in row %}
+            <td>{{ element }}</td> 
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

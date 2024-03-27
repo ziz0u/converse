@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Análisis de Incidentes</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/bootstrap.min.css') }}">
+  <!-- link rel="stylesheet" type="text/css" href="templates/bootstrap.min.css" -->
+  <style>
+      body {
+        padding-top: 3.5rem;
+      }
+      .bg-dark {
+        background-color: #dc3545 !important;
+      }
+      .btn-outline-success {
+        color: #dee2e6;
+        background-color: transparent;
+        background-image: none;
+        border-color: #ced4da;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+  </style>
+  <script src="{{ url_for('static', path='/jquery-3.3.1.slim.min.js') }}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="{{ url_for('static', path='/jquery-slim.min.js') }}"><\/script>')</script><script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">TS Linux</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+	    <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Server" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Analyze</button>
+      </form>
+    </div>
+  </nav>
+  <main role="main">
+    <div class="jumbotron">
+      <div class="container">
+        <!-- h1 class="display-4">Name server</h1-->
+        <h1 class="display-4">{% for row in csvlist %} {% for element in row %} {% if "vl" in element %} {{ element }} {% endif %} {% endfor %} {% endfor %}</h1>
+        <p>We'll use it as a starting point to show the server info.</p>
+        <!-- p><a class="btn btn-primary btn-sm" href="#" role="button">More server info  &raquo;</a></p -->
+      </div>
+    </div>
+  </main>
+  <table>
+    <tbody>
+      {% for row in csvlist %}
+        <tr>
+          {% for element in row %}
+            <td>{{ element }}</td> 
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h3">Load average</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+          <span data-feather="calendar"></span>
+          This week
+        </button>
+      </div>
+    </div>
+    <canvas class="my-4 w-60" id="myChart" width="600" height="380"></canvas>
+  </main>
+</body>
+<!-- footer class="container">
+  <p>&copy; SDS 2024</p>
+</footer -->
+</html>

@@ -70,31 +70,31 @@
       </form>
     </div>
   </nav>
-  <main role="main">
-    <div class="jumbotron">
-      <div class="container">
-        <!-- h1 class="display-4">Name server</h1-->
-        <h1 class="display-4">{% for row in csvlist %} {% for element in row %} {% if "vl" in element %} {{ element }} {% endif %} {% endfor %} {% endfor %}</h1>
-        <p>We'll use it as a starting point to show the server info.</p>
-        <!-- p><a class="btn btn-primary btn-sm" href="#" role="button">More server info  &raquo;</a></p -->
-      </div>
-    </div>
-  </main>
 
-  <div class="card-group">
-    {% for column in range(4, 12) %}
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{csvlist[0][column]}}</h5>
-          {% for i in range(1, csvlist|length) %}
-            <div class="card-text">
-              <td>{{csvlist[i][column]}}</td>
-            </div>
-          {% endfor %}
+  {% for i in range(1, csvlist|length) %}
+    <main role="main">
+      <div class="jumbotron">
+        <div class="container">
+          <!-- Name server -->
+          <h1 class="display-4">{{csvlist[i][0]}}</h1>
+          <p>{{csvlist[i][1]}}; {{csvlist[i][2]}}; {{csvlist[i][3]}}</p>
         </div>
       </div>
-    {% endfor %}
-  </div>
+    </main>
+
+    <div class="card-group">
+      {% for column in range(4, 12) %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{csvlist[0][column]}}</h5>
+              <div class="card-text">
+                <td>{{csvlist[i][column]}}</td>
+              </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
 
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

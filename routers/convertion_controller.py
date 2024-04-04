@@ -19,12 +19,18 @@ def show(request: Request):
     """
     Conviente el recurso csv a un formato html
     """
+    return templates.TemplateResponse('convertion.html', {
+        'request': request, 
+        "csvlist": convertion.to_list()
+    })
 
-    # return templates.TemplateResponse(
-    #     request=request, name="convertion.html", context={"csvlist": convertion.to_list()}
-    # )
+@router.post("/analyze", response_class=HTMLResponse)
+def analize_with_script_bash(request: Request):
+    """
+    Este wey recaba parametros de fecha hora y/o nombre del servidor, los params
+    son usados como parametros del script bash.
+    @return #this.#show
+    """
+    # TODO: invocar funcion bash
+    return show(request)
 
-    template = 'convertion.html'
-    context = {'request': request, "csvlist": convertion.to_list()}
-
-    return templates.TemplateResponse(template, context)

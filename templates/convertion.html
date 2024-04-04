@@ -45,7 +45,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -64,12 +64,18 @@
           </div>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0" method='POST' action="/convertion/analyze">
-        <input class="form-control mr-sm-2" type="text" placeholder="Server" aria-label="Search">
+      <form class="form-inline my-2 my-lg-0" method='GET' action="/convertion/analyze">
+        <!-- input class="form-control mr-sm-2" type="text" placeholder="Server" 
+            aria-label="Search" name="query" -->
+        <textarea class="form-control mr-sm-2" id="monoTA" rows="1" name="query">{{ query }}</textarea>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Analyze</button>
       </form>
     </div>
   </nav>
+
+  {% if message_error %}
+    <div class="alert alert-warning" role="alert">{{ message_error }}</div>
+  {% endif %}
 
   {% for i in range(1, csvlist|length) %}
     <main role="main">

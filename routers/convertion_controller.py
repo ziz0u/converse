@@ -60,9 +60,9 @@ def analize_with_script_bash(request: Request, query: str):
     if query == "": # Caso de uso no hay cadena -> optiene los servers por default
         return show(request)
 
-    hours[0] = "00:00:00"
-    hours[1] = "23:59:59"
+    hours = ["00:00:00", "23:59:59"]
     day = date.today().strftime('%d')
+    servers = None
   
     for predicate in re.split(";", query):
         predicate = predicate.strip()
@@ -75,7 +75,7 @@ def analize_with_script_bash(request: Request, query: str):
             servers = re.split(",", re.split("=", predicate)[1])
             continue
             
-        if  re.search('^ ?time=\\d+\\:\\d+ d+\\:\\d+$', predicate):
+        if  re.search('^ ?time=\\d+:\\d+ \\d+:\\d+$', predicate):
             hours = re.split(" ", re.split("=", predicate)[1])
 
             try:
@@ -92,7 +92,7 @@ def analize_with_script_bash(request: Request, query: str):
             this_year = date.today().strftime('%Y')
 
             try:
-                time.strptime(f"{today}/{this_month}/{this_year}", '%d/%m/%Y')
+                time.strptime(f"{day}/{this_month}/{this_year}", '%d/%m/%Y')
             except ValueError:
                 return show(request, query, f"Día del mes no válido ( {predicate} )")
 

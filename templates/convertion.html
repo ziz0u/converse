@@ -66,10 +66,16 @@
       </ul>
       <form class="form-inline my-2 my-lg-0" method='GET' action="/convertion/analyze">
         <div class="custom-control custom-checkbox mr-sm-2">
-          <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+          <input type="checkbox" class="custom-control-input" id="customControlAutosizing"
+              name=isSpecificDay />
+          <script type="text/javascript">
+            const checkbox = document.getElementById('customControlAutosizing');
+            checkbox.checked = {{ 'true' if isSpecificDay else 'false' }};
+            console.log({{ 'true' if isSpecificDay else 'false' }})
+          </script>
           <label class="custom-control-label" for="customControlAutosizing">Specific day</label>
         </div>
-        <select class="custom-select col-sm-1 mr-sm-2" id="inlineFormCustomSelect" readonly>
+        <select class="custom-select col-sm-1 mr-sm-2" id="inlineFormCustomSelect" readonly name=day>
           <option selected>day</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -103,9 +109,17 @@
           <option value="30">30</option>
           <option value="31">31</option>
         </select>
-        <input class="form-control col-sm-1 mr-sm-2" type="text" placeholder="hh:mm:ss" aria-label="Search" name="query">
-        <input class="form-control col-sm-1 mr-sm-2" type="text" placeholder="hh:mm:ss" aria-label="Search" name="query">
-        <textarea class="form-control mr-sm-2" id="monoTA" rows="1" placeholder="Server(s)"name="query">{{ query }}</textarea>
+        <script type="text/javascript">
+          var element = document.getElementById("inlineFormCustomSelect");
+          if ("{{day}}")
+            element.value = "{{day}}";
+        </script>
+        <input class="form-control col-sm-1 mr-sm-2" type="text" 
+          placeholder="hh:mm" aria-label="Search" name="start_hour" value="{{start_hour}}" />
+        <input class="form-control col-sm-1 mr-sm-2" type="text"
+          placeholder="hh:mm" aria-label="Search" name="end_hour" value="{{end_hour}}">
+        <textarea class="form-control mr-sm-2" id="monoTA" rows="1" 
+          placeholder="Server(s)"name="servers">{{ servers }}</textarea>
         <button class="btn btn-outline-success mr-sm-2 my-2 my-sm-0" type="submit">Analyze</button>
       </form>
     </div>

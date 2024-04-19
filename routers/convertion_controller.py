@@ -50,7 +50,7 @@ def analize_with_script_bash(request: Request, isSpecificDay : bool = False, day
     servers = servers.strip()
 
     if servers == "":
-        return show(request, isSpecificDay, day, start_hour, end_hour, servers)
+        return show(request, isSpecificDay, day, start_hour, end_hour, servers, "No has agregado un servidor para analizar")
 
     if not isSpecificDay or day == "day":
         day = date.today().strftime('%d')
@@ -61,7 +61,7 @@ def analize_with_script_bash(request: Request, isSpecificDay : bool = False, day
     try:
         time.strptime(f"{day}/{this_month}/{this_year}", '%d/%m/%Y')
     except ValueError:
-        return show(request, isSpecificDay, day, start_hour, end_hour, servers, 
+        return show(request, isSpecificDay, day, start_hour, end_hour, servers,
                 f"Día del mes no válido ( {day} )")
 
 
@@ -74,13 +74,13 @@ def analize_with_script_bash(request: Request, isSpecificDay : bool = False, day
         time.strptime(hours[0], '%H:%M:%S')
         time.strptime(hours[1], '%H:%M:%S')
     except ValueError:
-        return show(request, isSpecificDay, day, start_hour, end_hour, servers, 
+        return show(request, isSpecificDay, day, start_hour, end_hour, servers,
                 f"Formato de HORAS no válido ( {start_hour} - {end_hour} )")
 
     os.system(f"""
-        ansible-playbook -u user -s \\
+        echo "ansible-playbook -u user -s \\
           Vulnerabilities/analysisForIncidents.sh -d {day} {hours[0]} {hours[1]} \\
-          -o logfile.csv -i {",".join(servers)}
+          -o logfile.csv -i {servers}"
     """)
 
 

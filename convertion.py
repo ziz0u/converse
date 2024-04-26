@@ -1,6 +1,6 @@
 import __main__
 import csv
-
+import re
 
 class Convertion:
 	"""
@@ -19,5 +19,6 @@ class Convertion:
 
 			for row in spamreader:
 				rows.append(row)
+				row[14] =  re.sub('(\\d+ \\w+) ', '\\1<br/>', row[14])
 
 			return rows

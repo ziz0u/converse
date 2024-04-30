@@ -19,6 +19,7 @@ class Convertion:
 
 			for row in spamreader:
 				rows.append(row)
-				row[14] =  re.sub('(\\d+ \\w+) ', '\\1<br/>', row[14])
+				#row[13] =  re.sub('(\\d+ \\w+) ', '\\1<br/>', row[13])
+				#row[14] =  re.sub('(\\d+ \\w+) ', '\\1<br/>', row[14])
 
 			return rows

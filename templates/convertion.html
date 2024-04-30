@@ -153,11 +153,11 @@
 
     <div class="card-group" style="margin-left: 1%; margin-right: 1%">
       <div class="row">
-        {% for column in range(4, 15) %}
+        {% for column in range(4, 16) %}
           <div class="col-sm-3">
             <div class="card" style="width: 18rem;">
               <div class="card-body">
-                <div class="card-title">{{csvlist[0][column]}}</div>
+                <h5 class="card-title">{{csvlist[0][column]}}</h5>
                 <div class="card-text">
                   <td>{{ csvlist[i][column] | safe }}</td>
                 </div>
@@ -186,7 +186,20 @@
     <canvas class="my-4 w-60" id="myChart" width="600" height="380"></canvas>
   </main>
 </body>
-<!-- footer class="container">
-  <p>&copy; SDS 2024</p>
-</footer -->
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">&copy; 2024 Técnica de Sistemas Linux, Orion</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Health Check</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+  </footer>
+</div>
 </html>

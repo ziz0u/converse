@@ -72,7 +72,6 @@
           <script type="text/javascript">
             const checkbox = document.getElementById('customControlAutosizing');
             checkbox.checked = {{ 'true' if isSpecificDay else 'false' }};
-            console.log({{ 'true' if isSpecificDay else 'false' }})
           </script>
           <label class="custom-control-label" for="customControlAutosizing">Specific day</label>
         </div>
@@ -111,9 +110,15 @@
           <option value="31">31</option>
         </select>
         <script type="text/javascript">
-          var element = document.getElementById("inlineFormCustomSelect");
+          var days = document.getElementById("inlineFormCustomSelect");
+          days.disabled = !checkbox.checked;
+          
           if ("{{day}}")
-            element.value = "{{day}}";
+            days.value = "{{day}}";
+
+          checkbox.onclick = function() {
+            days.disabled = !checkbox.checked;
+          }
         </script>
         <input class="form-control col-sm-1 mr-sm-2" type="text" 
           placeholder="hh:mm" aria-label="Search" name="start_hour" value="{{start_hour}}" />

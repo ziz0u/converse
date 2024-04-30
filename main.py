@@ -9,7 +9,7 @@ import uvicorn
 from uvicorn.config import LOGGING_CONFIG
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from routers import convertion_controller
+from routers import convertion_controller,healthy_controller
 
 if len(sys.argv) != 2:
     print("[-] No se introdujo la ruta absoluta del recurso csv")
@@ -28,6 +28,7 @@ if not os.path.isfile(CSV_FILE_NAME):
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(convertion_controller.router)
+app.include_router(healthy_controller.router)
 
 if __name__ == "__main__":
     # uvicorn.run(app, host = "0.0.0.0", port=5000, log_level="info", ssl_keyfile = "certificates/private.key", ssl_certfile = "certificates/certchain.pem")

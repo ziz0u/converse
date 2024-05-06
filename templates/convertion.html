@@ -5,28 +5,10 @@
   <meta charset="UTF-8">
   <title>Análisis de Incidentes</title>
   <link rel="stylesheet" href="{{ url_for('static', path='/bootstrap.min.css') }}">
-  <!-- link rel="stylesheet" type="text/css" href="templates/bootstrap.min.css" -->
-  <!--script src="{{ url_for('static', path='/bootstrap.bundle.js') }}"></script -->
-  {% block javascript %}
-  <script src="{{ url_for('static', path='/popper.min.js') }}"></script>
   <script src="{{ url_for('static', path='/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static', path='/jquery.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', path='/popper.min.js') }}"></script>
   <script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ url_for('static', path='/bootstrap.bundle.js') }}"></script>
-  <script src="{{ url_for('static', path='/tooltip.js') }}"></script>
-  <script src="{{ url_for('static', path='/popover.js') }}"></script>
-  <script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl)
-})
-  </script>
-  {% endblock %}
-
-
   <style>
       body {
         padding-top: 3.5rem;
@@ -71,8 +53,6 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         }
       }
   </style>
-  <script src="{{ url_for('static', path='/jquery-3.3.1.slim.min.js') }}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="{{ url_for('static', path='/jquery-slim.min.js') }}"><\/script>')</script><script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -254,9 +234,16 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 </div>
 
 <div class="container mt-3">
-  <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="Veamos">
-  Canijaso
+  <button type="button" class="btn btn-secondary"
+      data-toggle="popover" title="Popover Header"
+      data-content="Some content inside the popover">
+    Canijaso
   </button>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();   
+    });
+  </script>
   <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
   Tooltip with HTML
   </button>

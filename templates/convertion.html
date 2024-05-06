@@ -6,6 +6,27 @@
   <title>Análisis de Incidentes</title>
   <link rel="stylesheet" href="{{ url_for('static', path='/bootstrap.min.css') }}">
   <!-- link rel="stylesheet" type="text/css" href="templates/bootstrap.min.css" -->
+  <!--script src="{{ url_for('static', path='/bootstrap.bundle.js') }}"></script -->
+  {% block javascript %}
+  <script src="{{ url_for('static', path='/popper.min.js') }}"></script>
+  <script src="{{ url_for('static', path='/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', path='/bootstrap.bundle.js') }}"></script>
+  <script src="{{ url_for('static', path='/tooltip.js') }}"></script>
+  <script src="{{ url_for('static', path='/popover.js') }}"></script>
+  <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+  </script>
+  {% endblock %}
+
+
   <style>
       body {
         padding-top: 3.5rem;
@@ -26,6 +47,22 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+      }
+      .brd {
+        border: 1px black;
+        padding: 10px;
+        border-style: inset;
+        border-collapse: collapse;
+      }
+      .table-wrapper {
+        border: 1px solid transparent; //white
+        //box-shadow: 0 1px 0 gray;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        //overflow-y: scroll;
+        overflow-x: scroll;
+        //overflow: auto;
       }
 
       @media (min-width: 768px) {
@@ -173,6 +210,60 @@
       </div>
     </div>
   {% endfor %}
+
+<div class="table-wrapper">
+  <table class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Satus</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider table-divider-color">
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>
+        <span class="badge badge-success rounded-pill d-inline">Active</span>
+      </td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>
+        <span class="badge badge-primary rounded-pill d-inline">Onboarding</span>
+      </td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>
+        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+      </td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="Veamos">
+  Canijaso
+  </button>
+  <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+  Tooltip with HTML
+  </button>
+
+  <a href="#" data-bs-toggle="tooltip" title="Some tooltip text!">Hover over me</a>
+  <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+</div>
 
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

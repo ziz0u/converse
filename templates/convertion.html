@@ -195,40 +195,20 @@
   <table class="table table-sm table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Satus</th>
-      <th scope="col">Handle</th>
+      {% for head in healthylist[0] %}
+        <th scope="col">{{ head }}</th>  
+      {% endfor %}
     </tr>
   </thead>
   <tbody class="table-group-divider table-divider-color">
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>
-        <span class="badge badge-success rounded-pill d-inline">Active</span>
-      </td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>
-        <span class="badge badge-primary rounded-pill d-inline">Onboarding</span>
-      </td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>
-        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-      </td>
-      <td>@twitter</td>
-    </tr>
+    {% for body in healthylist[1:] %}
+      <tr>
+        <th scope="row">{{ body[0] }}</th>
+        {% for cell in body[1:] %}
+          <th>{{ cell }}</th>
+        {% endfor %}
+      </tr>
+    {% endfor %}
   </tbody>
 </table>
 </div>

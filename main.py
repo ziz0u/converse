@@ -11,18 +11,28 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from routers import convertion_controller,healthy_controller
 
-if len(sys.argv) != 2:
-    print("[-] No se introdujo la ruta absoluta del recurso csv")
+if len(sys.argv) != 3:
+    print("[-] Verifica la cantidad de parámetros, 1 (csv con lusta de servers) 2 (csv con lista de healthchecks)")
     exit(1)
 
 CSV_FILE_NAME = sys.argv[1]
 
 if not re.match(r'^/', CSV_FILE_NAME):
-    print(f"[-] El argumento {CSV_FILE_NAME} no es una ruta absoluta")
+    print(f"[-] El 1er argumento {CSV_FILE_NAME} no es una ruta absoluta")
     exit(1)
 
 if not os.path.isfile(CSV_FILE_NAME):
     print(f"[-] No existe el recurso {CSV_FILE_NAME}")
+    exit(2)
+
+HEALTHY_FILE = sys.argv[2]
+
+if not re.match(r'^/', HEALTHY_FILE):
+    print(f"[-] El 2o argumento {HEALTHY_FILE} no es una ruta absoluta")
+    exit(1)
+
+if not os.path.isfile(HEALTHY_FILE):
+    print(f"[-] No existe el recurso {HEALTHY_FILE}")
     exit(2)
 
 app = FastAPI()

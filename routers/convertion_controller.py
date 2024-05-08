@@ -25,10 +25,10 @@ def show(request: Request, isSpecificDay : bool = False, day : str = "day",
     """
     Conviente el recurso csv a un formato html
     """
-
     return templates.TemplateResponse('convertion.html', {
         'request': request, 
         "csvlist": convertion.to_list(),
+        "healthylist": convertion.healthy_list(servers),
         "isSpecificDay": isSpecificDay,
         "day": day,
         "start_hour": start_hour,

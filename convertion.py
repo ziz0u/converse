@@ -35,18 +35,22 @@ class Convertion:
 		"""
 		with open(__main__.HEALTHY_FILE, newline='') as csvfile:
 			spamreader = csv.reader(csvfile, delimiter='|')
-			rows = []
-
+			healts = []
+			
 			if specifict_servers:
-				for row in spamreader[1:]:
-					for server in specifict_servers.split(","):
-						if row[0] == server:
-							rows.append(row)
-							continue
 
-				return rows
+				i = 0
 
-			for row in spamreader:
-				rows.append(row)
+				for row in spamreader:
+					if i == 0:
+						healts.append(row)
+					else:
+						for server in specifict_servers.split(","):
+							if row[0] == server:
+								healts.append(row)
 
-			return rows
+					i = i + 1
+
+				return healts
+
+			return healts

@@ -11,7 +11,7 @@
   <script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}"></script>
   <style>
       body {
-        padding-top: 3.5rem;
+        padding-top: 3.3rem;
       }
       .bg-dark {
         background-color: #dc3545 !important;
@@ -37,8 +37,7 @@
         border-collapse: collapse;
       }
       .table-wrapper {
-        border: 1px solid transparent; //white
-        //box-shadow: 0 1px 0 gray;
+        border: 1px solid transparent;
         position: relative;
         height: 100%;
         width: 100%;
@@ -57,9 +56,9 @@
 <body>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#">ORION Linux</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button-->
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <!--ul class="navbar-nav mr-auto"-->
@@ -70,17 +69,20 @@
         <li class="nav-item">
           <a class="nav-link" href="/healthy">HCheck</a>
         </li>
-        <li class="nav-item">
+        <!--li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-        <!--li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-	        <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
         </li-->
+        <li class="nav-item dropdown">
+          <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+		  </a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+	        <a class="dropdown-item" href="https://access.redhat.com/support/cases/new" target="_blank" rel="noopener noreferrer">Open Red Hat Case</a>
+            <a class="dropdown-item" href="#">FAQ</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">About</a>
+          </div>
+        </li>
       </ul>
       <form class="form-inline ml-sm-5 my-2 my-lg-0" method='GET' action="/convertion/analyze">
         <div class="custom-control custom-checkbox mr-sm-2">
@@ -177,7 +179,7 @@
       <div class="row">
         {% for column in range(4, 16) %}
           <div class="col-sm-3">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 20rem;">
               <div class="card-body">
                 <h5 class="card-title">{{csvlist[0][column]}}</h5>
                 <div class="card-text">
@@ -192,44 +194,42 @@
   {% endfor %}
 
 <div class="table-wrapper">
-  <table class="table table-sm table-hover">
-  <thead>
-    <tr>
-      {% for head in healthylist[0] %}
-        <th scope="col">{{ head }}</th>  
-      {% endfor %}
-    </tr>
-  </thead>
-  <tbody class="table-group-divider table-divider-color">
-    {% for body in healthylist[1:] %}
+  <table class="table table-sm align-middle mb-0 bg-white">
+    <thead class="bg-light">
       <tr>
-        <th scope="row">{{ body[0] }}</th>
-        {% for cell in body[1:] %}
-          <th>{{ cell }}</th>
+        {% for head in healthylist[0] %}
+          <th scope="col">{{ head }}</th>
         {% endfor %}
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody class="table-group-divider table-divider-color">
+      {% for body in healthylist[1:] %}
+        <tr>
+          <th scope="row">{{ body[0] }}</th>
+          {% for cell in body[1:] %}
+            <td>
+              <p class="fw-normal mb-1">{{ cell }}</p>
+              <!--p class="text-muted mb-0">{{ cell }}</p-->
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 
 <div class="container mt-3">
   <button type="button" class="btn btn-secondary"
-      data-toggle="popover" title="Popover Header"
-      data-content="Some content inside the popover">
-    Canijaso
+      data-toggle="popover" title="Health check casi listo"
+      data-content="Implementando opciones al HC">
+    Construcción
   </button>
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('[data-toggle="popover"]').popover();   
-    });
-  </script>
-  <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
-  Tooltip with HTML
+  <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+    Feature to HC?
   </button>
 
-  <a href="#" data-bs-toggle="tooltip" title="Some tooltip text!">Hover over me</a>
-  <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+  <!--a href="#" data-toggle="tooltip" title="Some tooltip text!">Hover over me</a>
+  <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button-->
 </div>
 
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -259,10 +259,17 @@
 
     <ul class="nav col-md-4 justify-content-end">
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+      <!--li class="nav-item"><a href="/healthy/" class="nav-link px-2 text-muted">Health Check</a></li-->
+      <li class="nav-item"><a href="https://access.redhat.com/support/cases/new" target="_blank" rel="noopener noreferrer" class="nav-link px-2 text-muted">Open Red Hat Case</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-      <li class="nav-item"><a href="/healthy/" class="nav-link px-2 text-muted">Health Check</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
     </ul>
   </footer>
 </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
 </html>

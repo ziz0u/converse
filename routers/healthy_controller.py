@@ -19,11 +19,12 @@ convertion = Convertion()
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
-def show(request: Request):
+def show(request: Request, servers : str = ""):
     """
     Vista del HC html
     """
-
     return templates.TemplateResponse('healthy.html', {
-        'request': request
+        'request': request,
+        "healthylist": convertion.healthy_list(servers),
+        "servers": servers
     })

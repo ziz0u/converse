@@ -8,7 +8,39 @@
   <script>window.jQuery || document.write('<script src="{{ url_for('static', path='/jquery-slim.min.js') }}"><\/script>')</script><script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 </head>
 <body>
-</body>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-1 border-bottom">
+      <h5 class="h5">Health Check</h5>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="exceller()">Export</button>
+        </div>
+      </div>
+    </div>
+<div class="table-wrapper">
+  <table class="table table-sm align-middle mb-0 bg-white" id="tableHC">
+    <thead class="bg-light">
+      <tr>
+        {% for head in healthylist[0] %}
+          <th scope="col">{{ head }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody class="table-group-divider table-divider-color">
+      {% for body in healthylist[1:] %}
+        <tr>
+          <th scope="row">{{ body[0] }}</th>
+          {% for cell in body[1:] %}
+            <td>
+              <p class="fw-normal mb-1">{{ cell }}</p>
+              <!--p class="text-muted mb-0">{{ cell }}</p-->
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
 <div class="container">
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <p class="col-md-4 mb-0 text-muted">&copy; 2024 Técnica de Sistemas Linux, Orion</p>
@@ -25,4 +57,5 @@
     </ul>
   </footer>
 </div>
+</body>
 </html>

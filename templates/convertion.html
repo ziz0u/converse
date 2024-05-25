@@ -5,14 +5,20 @@
   <meta charset="UTF-8">
   <title>Análisis de Incidentes</title>
   <link rel="stylesheet" href="{{ url_for('static', path='/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='/bootstrap-icons.min.css') }}">
   <script src="{{ url_for('static', path='/bootstrap.js') }}"></script>
   <script src="{{ url_for('static', path='/jquery.slim.min.js') }}"></script>
   <script src="{{ url_for('static', path='/popper.min.js') }}"></script>
   <script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', path='/color-modes.js') }}"></script>
   <script src="{{ url_for('static', path='/tableToExcel.js') }}"></script>
   <style>
       body {
         padding-top: 3.3rem;
+      }
+      .jumbotron {
+        padding: 3rem 2rem; //2.5 1.5 0rem
+        margin-bottom: 1rem;
       }
       .bg-dark {
         background-color: #dc3545 !important;
@@ -178,14 +184,25 @@
 
     <div class="card-group" style="margin-left: 1%; margin-right: 1%">
       <div class="row">
-        {% for column in range(4, 16) %}
+        {% for column in range(4, 21) %}
           <div class="col-sm-3">
             <div class="card" style="width: 20rem;">
               <div class="card-body">
                 <h5 class="card-title">{{csvlist[0][column]}}</h5>
+                {% if column > 3 and column < 10 %}
+                <div class="card-text">
+                  <td>{{ csvlist[i][column] | safe }}%</td>
+                </div>
+				{% elif column == 10 %}
+                <div class="card-text">
+                  <!--td>{{ csvlist[i][column] | safe }}</td-->
+				  <td><p class="text-muted mb-0"><small>{{ csvlist[i][column] | safe }}</small></p>
+                </div>
+                {% else %}
                 <div class="card-text">
                   <td>{{ csvlist[i][column] | safe }}</td>
                 </div>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -216,12 +233,20 @@
         <tr>
           <th scope="row">{{ body[0] }}</th>
           {% for cell in body[1:] %}
-            {% if "_OK" == cell or " OK" == cell or "OK" == cell %}
+            {% if "_OK" == cell or " OK" == cell or "OK" == cell or "enabled" == cell or "active" == cell or "Active" == cell or "Yes" == cell %}
             <td>
-              <span class="badge badge-success">Fine<i class="bi bi-hand-thumbs-down"></i></span>
-			  <i class="bi bi-check"></i>
+              <!--span class="badge badge-success">Right <i class="bi bi-check2" style="font-size: 1rem;"></i></span-->
+              <span class="badge badge-success" data-toggle="tooltip" data-html="true" title="<u>{{ cell }}</u>">Right <i class="bi bi-check2" style="font-size: 1rem;"></i></span>
               <!--p class="fw-normal mb-1">{{ cell }}</p-->
               <!--p class="text-muted mb-0">{{ cell }}</p-->
+            </td>
+            {% elif "_KO" == cell or " KO" == cell or "KO" == cell or "disabled" == cell or "inactive" == cell or "Inactive" == cell or "NOK" == cell or "No" == cell %}
+            <td>
+              <span class="badge badge-danger" data-toggle="tooltip" data-html="true" title="<u>{{ cell }}</u>">Alert <i class="bi bi-x-lg" style="font-size: 1rem;"></i></span>
+            </td>
+            {% elif "unknown" == cell %}
+            <td>
+              <span class="badge badge-warning" data-toggle="tooltip" data-html="true" title="<u>{{ cell }}</u>">Warning <i class="bi bi-exclamation-diamond" style="font-size: 1rem;"></i></span>
             </td>
             {% else %}
             <td>

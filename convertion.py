@@ -37,20 +37,26 @@ class Convertion:
 			spamreader = csv.reader(csvfile, delimiter='|')
 			healts = []
 			
-			if specifict_servers:
-
-				i = 0
-
-				for row in spamreader:
-					if i == 0:
-						healts.append(row)
-					else:
-						for server in specifict_servers.split(","):
-							if row[0] == server:
-								healts.append(row)
-
-					i = i + 1
-
+			if not specifict_servers:
 				return healts
+
+			for i, row in enumerate(spamreader):
+				if i == 0:
+					healts.append(row)
+				else:
+					for server in specifict_servers.split(","):
+						if row[0] == server:
+							healts.append(row)
+
+			if len(healts) <= 1:
+				return healts
+
+			first_body = healts[1]
+			head = healts[0]
+
+			for i in range(1, len(first_body)):
+				if not re.search('([_ ]?OK)|enabled|[Aa]ctive|Yes|[_ ]?KO|disabled|[Ii]nactive|Not|No |NO |unknown', first_body[i]):
+					first_body[i] = ""
+					head[i] = ""
 
 			return healts

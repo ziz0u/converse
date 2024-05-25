@@ -18,6 +18,11 @@ router = APIRouter(
 convertion = Convertion()
 templates = Jinja2Templates(directory="templates")
 
+def regex_search(text, regexp):
+    return re.search(regexp, text) 
+
+templates.env.filters['regex_search'] = regex_search
+
 
 @router.get("/", response_class=HTMLResponse)
 def show(request: Request, isSpecificDay : bool = False, day : str = "day",

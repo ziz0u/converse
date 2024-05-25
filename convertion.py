@@ -28,10 +28,10 @@ class Convertion:
 
 			return rows
 
-	def healthy_list(self, specifict_servers):
+	def healthy_list(self, specifict_servers, all_data = False):
 		"""
 		Obtine la lista de health check de servidores desde un archivo csv separado por pipes
-		(Posiblemente obsoleto en el futuro). Usará la variable estática.
+		(Posiblemente obsoleto en el futuro). Usará la variable estática __main__.HEALTHY_FILE.
 		"""
 		with open(__main__.HEALTHY_FILE, newline='') as csvfile:
 			spamreader = csv.reader(csvfile, delimiter='|')
@@ -51,12 +51,9 @@ class Convertion:
 			if len(healts) <= 1:
 				return healts
 
-			first_body = healts[1]
-			head = healts[0]
-
-			for i in range(1, len(first_body)):
-				if not re.search('([_ ]?OK)|enabled|[Aa]ctive|Yes|[_ ]?KO|disabled|[Ii]nactive|Not|No |NO |unknown', first_body[i]):
-					first_body[i] = ""
-					head[i] = ""
+			for healt in healts:
+				for index in range(1, len(healt)):
+					if not index in [14,15,35,36,37,38,39,40,41,42,44,45,46,48,49,51,52,53,54,55,56,70,71,72,76,77,80,83,84,87,88,91,101,102,103,104,105,106,107,108,109,110,112,113,115,116,119,120,127,128,129,132,133,134,135,140,142,148,149,151,152,156,157]:
+						healt[index] = "#####"
 
 			return healts

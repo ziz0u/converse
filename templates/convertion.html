@@ -224,7 +224,7 @@
     <thead class="bg-light">
       <tr>
         {% for head in healthylist[0] %}
-          {% if head != ""  %}
+          {% if head != "#####"  %}
             <th scope="col">{{ head }}</th>
           {% endif %}
         {% endfor %}
@@ -242,9 +242,9 @@
                   Right <i class="bi bi-check2" style="font-size: 1rem;"></i>
                 </span>
               </td>
-            {% elif cell | regex_search('[_ ]?KO|disabled|[Ii]nactive|Not|No |NO ') %}
+            {% elif cell | regex_search('[_ ]?KO|disabled|[Ii]nactive|[ _]?[nN][oO][kKtT _]?') %}
               <td>
-                <span class="badge badge-danger" data-toggle="tooltip" 
+                <span class="badge badge-danger" data-toggle="tooltip" \
                     data-html="true" title="<u>{{ cell }}</u>">
                   Alert <i class="bi bi-x-lg" style="font-size: 1rem;"></i>
                 </span>
@@ -256,7 +256,13 @@
                   Warning <i class="bi bi-exclamation-diamond" style="font-size: 1rem;"></i>
                 </span>
               </td>
-            {% endif %}
+            {% elif "#####" == cell %}
+
+            {% else %}
+              <td>
+                <span data-toggle="tooltip" data-html="true">{{ cell }}</span>
+              </td>
+            {% endif %} 
           {% endfor %}
         </tr>
       {% endfor %}

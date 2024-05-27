@@ -235,32 +235,35 @@
         <tr>
           <th scope="row">{{ body[0] }}</th>
           {% for cell in body[1:] %}
-            {% if cell | regex_search('([_ ]?OK)|enabled|[Aa]ctive|Yes') %}
+            {% if "unknown" == cell %}
               <td>
-                <span class="badge badge-success" data-toggle="tooltip" data-html="true" 
-                    title="<u>{{ cell }}</u>">
-                  Right <i class="bi bi-check2" style="font-size: 1rem;"></i>
+                <span class="badge badge-warning" data-toggle="tooltip" 
+                    data-html="true" title="<u>{{ cell }}</u>">
+                  Warning <i class="bi bi-exclamation-diamond" style="font-size: 1rem;"></i>
                 </span>
               </td>
             {% elif cell | regex_search('[_ ]?KO|disabled|[Ii]nactive|[ _]?[nN][oO][kKtT _]?') %}
               <td>
-                <span class="badge badge-danger" data-toggle="tooltip" \
+                <span class="badge badge-danger" data-toggle="tooltip"
                     data-html="true" title="<u>{{ cell }}</u>">
                   Alert <i class="bi bi-x-lg" style="font-size: 1rem;"></i>
                 </span>
               </td>
-            {% elif "unknown" == cell %}
+            {% elif cell | regex_search('([_ ]?OK)|enabled|[Aa]ctive|Yes') %}
               <td>
-                <span class="badge badge-warning" data-toggle="tooltip" data-html="true" 
-                    title="<u>{{ cell }}</u>">
-                  Warning <i class="bi bi-exclamation-diamond" style="font-size: 1rem;"></i>
+                <span class="badge badge-success" data-toggle="tooltip" 
+                    data-html="true" title="<u>{{ cell }}</u>">
+                  Right <i class="bi bi-check2" style="font-size: 1rem;"></i>
                 </span>
               </td>
             {% elif "#####" == cell %}
 
             {% else %}
               <td>
-                <span data-toggle="tooltip" data-html="true">{{ cell }}</span>
+                <span class="badge badge-secondary" data-toggle="tooltip" 
+                    data-html="true" title="<u>{{ cell }}</u>">
+                  Info
+                </span>
               </td>
             {% endif %} 
           {% endfor %}

@@ -37,6 +37,7 @@ if not os.path.isfile(HEALTHY_FILE):
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/fonts", StaticFiles(directory="static/fonts"), name="fonts")
 app.include_router(convertion_controller.router)
 app.include_router(healthy_controller.router)
 

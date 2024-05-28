@@ -12,6 +12,7 @@
   <script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', path='/color-modes.js') }}"></script>
   <script src="{{ url_for('static', path='/tableToExcel.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', path='/font-awesome.min.css') }}">
   <style>
       body {
         padding-top: 3.3rem;
@@ -152,7 +153,14 @@
           placeholder="hh:mm" aria-label="Search" name="end_hour" value="{{end_hour}}">
         <textarea class="form-control mr-sm-2" id="monoTA" rows="1" 
           placeholder="Server(s)"name="servers">{{ servers }}</textarea>
-        <button class="btn btn-outline-success mr-sm-5 my-2 my-sm-0" type="submit">Analyze</button>
+        <button id="analize" class="btn btn-outline-success mr-sm-5 my-2 my-sm-0" type="submit">
+          Analyze <i id="loading"></i>
+        </button>
+        <script type="text/javascript">
+          $("#analize").on("click", function() {
+            $("#loading").addClass("fa fa-refresh fa-spin");
+          });
+        </script>
         <select class="form-control custom-select-sm col-xs-2">
           <option selected disabled hidden>7 Fantásticos</option>
           <option value="1">ATM</option>

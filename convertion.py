@@ -20,8 +20,9 @@ class Convertion:
 				rows.append(row)
 				
 				try:
-					row[14] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[14])
-					row[15] = re.sub('([^ ]+ MB [^ ]+) ', '\\1<br/>', row[15])
+					row[18] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[18])
+					row[19] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[19])
+					row[20] = re.sub('([^ ]+ MB [^ ]+) ', '\\1<br/>', row[20])
 				except IndexError:
 					pass
 
@@ -48,18 +49,18 @@ class Convertion:
 						if row[0] == server:
 							healts.append(row)
 
-			if len(healts) <= 1:
-				return healts
+			if len(healts) <= 1 or all_data:
+			    return healts
 
 			for healt in healts:
 				for index in range(1, len(healt)):
 					if not index in [14, 15, 35, 36, 38, 39, 40, 41, 42,
-					                 44, 45, 46, 48, 49, 51, 52, 53, 54,
-					                 55, 56, 70, 71, 72, 76, 77, 80, 83,
-					                 84, 87, 88, 91, 101,102,103,104,105,
-					                 106,107,108,109,110,112,113,115,116,
-					                 119,120,127,128,129,132,133,134,135,
-					                 140,142,148,149,151,152,156,157]:
+							44, 45, 46, 48, 49, 51, 52, 53, 54,
+							55, 56, 70, 71, 72, 76, 77, 80, 83,
+							84, 87, 88, 91, 101,102,103,104,105,
+							106,107,108,109,110,112,113,115,116,
+							119,120,127,130,131,134,135,136,
+							137,142,144,150,151,153,154,158,159]:
 						healt[index] = "#####"
 
 			return healts

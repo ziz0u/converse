@@ -102,7 +102,7 @@
           <label class="custom-control-label" for="customControlAutosizing">Specific day</label>
         </div>
         <select class="custom-select col-sm-1 mr-sm-2" id="inlineFormCustomSelect" readonly name=day>
-          <option selected>day</option>
+          <option selected disabled hidden>day</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -153,8 +153,8 @@
         <textarea class="form-control mr-sm-2" id="monoTA" rows="1" 
           placeholder="Server(s)"name="servers">{{ servers }}</textarea>
         <button class="btn btn-outline-success mr-sm-5 my-2 my-sm-0" type="submit">Analyze</button>
-        <select class="form-control custom-select custom-select-sm col-sm-2">
-          <option selected>7 F</option>
+        <select class="form-control custom-select-sm col-xs-2">
+          <option selected disabled hidden>7 Fantásticos</option>
           <option value="1">ATM</option>
           <option value="2">BET</option>
           <option value="3">Conctact Center</option>
@@ -261,8 +261,8 @@
             {% else %}
               <td>
                 <span class="badge badge-secondary" data-toggle="tooltip" 
-                    data-html="true" title="<u>{{ cell }}</u>">
-                  Info
+                    data-html="true" title="<u>{{ cell if cell else 'No information to show' }}</u>">
+                  Info <i class="bi bi-info" style="font-size: 1rem;"></i>
                 </span>
               </td>
             {% endif %} 

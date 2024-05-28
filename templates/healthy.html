@@ -6,8 +6,20 @@
   <link rel="stylesheet" href="{{ url_for('static', path='/bootstrap.min.css') }}">
   <script src="{{ url_for('static', path='/jquery-3.3.1.slim.min.js') }}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="{{ url_for('static', path='/jquery-slim.min.js') }}"><\/script>')</script><script src="{{ url_for('static', path='/bootstrap.bundle.min.js') }}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+  <style>
+      .table-wrapper {
+        border: 1px solid transparent;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        //overflow-y: scroll;
+        overflow-x: scroll;
+        //overflow: auto;
+      }  
+  </stye>
 </head>
 <body>
+
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-1 border-bottom">
       <h5 class="h5">Health Check</h5>
       <div class="btn-toolbar mb-2 mb-md-0">
@@ -16,16 +28,16 @@
         </div>
       </div>
     </div>
-<div class="table-wrapper">
-  <table class="table table-sm align-middle mb-0 bg-white" id="tableHC">
-    <thead class="bg-light">
-      <tr>
-        {% for head in healthylist[0] %}
-          <th scope="col">{{ head }}</th>
-        {% endfor %}
-      </tr>
-    </thead>
-    <tbody class="table-group-divider table-divider-color">
+    <div class="table-wrapper">
+      <table class="table table-sm align-middle mb-0 bg-white" id="tableHC">
+        <thead class="bg-light">
+          <tr>
+          {% for head in healthylist[0] %}
+            <th scope="col">{{ head }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+      <tbody class="table-group-divider table-divider-color">
       {% for body in healthylist[1:] %}
         <tr>
           <th scope="row">{{ body[0] }}</th>

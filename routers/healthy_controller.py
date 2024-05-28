@@ -25,6 +25,6 @@ def show(request: Request, servers : str = ""):
     """
     return templates.TemplateResponse('healthy.html', {
         'request': request,
-        "healthylist": convertion.healthy_list(servers),
-        "servers": servers
+        "healthylist": convertion.healthy_list("srmttilm2mxr302", True),
+        "servers": "srmttilm2mxr302"
     })

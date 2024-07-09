@@ -56,6 +56,19 @@
         overflow-x: scroll;
         //overflow: auto;
       }
+      .card-scroll {
+        border: 1px solid transparent;
+        position: relative;
+        display: -webkit-box;
+		-webkit-line-clamp: 8; /* number of lines to show */
+        line-clamp: 8; 
+		-webkit-box-orient: vertical;
+        height: 50%;
+        width: 100%;
+        overflow-y: scroll;
+        //overflow-x: scroll;
+        //overflow: auto;
+      }
 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
@@ -103,7 +116,7 @@
             const checkbox = document.getElementById('customControlAutosizing');
             checkbox.checked = {{ 'true' if isSpecificDay else 'false' }};
           </script>
-          <label class="custom-control-label" for="customControlAutosizing">Specific day</label>
+          <label class="custom-control-label" for="customControlAutosizing">Specific</label>
         </div>
         <select class="custom-select col-sm-1 mr-sm-2" id="inlineFormCustomSelect" readonly name=day>
           <option selected disabled hidden>day</option>
@@ -210,7 +223,11 @@
 				{% elif column == 10 %}
                 <div class="card-text">
                   <!--td>{{ csvlist[i][column] | safe }}</td-->
-				  <td><p class="text-muted mb-0"><small>{{ csvlist[i][column] | safe }}</small></p>
+				  <td><p class="text-muted mb-0">{{ csvlist[i][column] | safe }}</p>
+                </div>
+				{% elif column == 17 %}
+                <div class="card-scroll card-text">
+                  <td>{{ csvlist[i][column] | safe }}</td>
                 </div>
                 {% else %}
                 <div class="card-text">

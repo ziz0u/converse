@@ -42,7 +42,7 @@ app.include_router(convertion_controller.router)
 app.include_router(healthy_controller.router)
 
 if __name__ == "__main__":
-    # uvicorn.run(app, host = "0.0.0.0", port=5000, log_level="info", ssl_keyfile = "certificates/private.key", ssl_certfile = "certificates/certchain.pem")
     LOGGING_CONFIG["formatters"]["access"]["fmt"] = "%(asctime)s %(levelprefix)s %(client_addr)s - \"%(request_line)s\" %(status_code)s"
     LOGGING_CONFIG["formatters"]["access"]["datefmt"] = "%Y-%m-%d %H:%M:%S"
-    uvicorn.run(app, host = "0.0.0.0", port=5000, log_level="info")
+    uvicorn.run("main:app", host = "0.0.0.0", port=5000, log_level="info", ssl_keyfile="certificates/private.key", ssl_certfile="certificates/certchain.pem")
+    #uvicorn.run(app, host = "0.0.0.0", port=5000, log_level="info")

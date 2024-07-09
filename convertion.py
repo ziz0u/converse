@@ -20,6 +20,7 @@ class Convertion:
 				rows.append(row)
 				
 				try:
+					row[10] = re.sub('(\\d{2}:\\d{2}:\\d{2} - [.0-9]+) ', '\\1&nbsp&nbsp&nbsp&nbsp', row[10])
 					row[18] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[18])
 					row[19] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[19])
 					row[20] = re.sub('([^ ]+ MB [^ ]+) ', '\\1<br/>', row[20])

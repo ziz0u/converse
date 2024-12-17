@@ -188,7 +188,7 @@
             $("#loading").addClass("fa fa-refresh fa-spin");
           });
         </script>
-        <select class="form-control custom-select-sm col-sm-2">
+        <select class="form-control custom-select-sm col-sm-2" disabled>
           <option selected disabled hidden>7 Fantásticos</option>
           <option value="1">ATM</option>
           <option value="2">BET</option>
@@ -244,6 +244,10 @@
 				  <td>{{ csvlist[i][column] | safe }}GB</td>
                 </div>
 				{% elif column >= 19 and column <= 22 %}
+                <div class="card-text">
+				  <td>{{ csvlist[i][column] | safe }}%</td>
+                </div>
+				{% elif column >= 25 and column <= 26 %}
                 <div class="card-text">
 				  <td>{{ csvlist[i][column] | safe }}%</td>
                 </div>

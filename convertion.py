@@ -20,11 +20,11 @@ class Convertion:
 				rows.append(row)
 				
 				try:
-					row[10] = re.sub('(\\d{2}:\\d{2}:\\d{2} - [.0-9]+) ', '\\1<br/>', row[10])
-					row[17] = re.sub('(\\d{2}:\\d{2}:\\d{2} -> [.0-9]+) ', '\\1<br/>', row[17])
-					row[18] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[18])
-					row[19] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[19])
-					row[20] = re.sub('([^ ]+ MB [^ ]+) ', '\\1<br/>', row[20])
+					row[23] = re.sub('(\\d{2}:\\d{2}:\\d{2} - [.0-9]+) ', '\\1<br/>', row[23])   #I/O Wait Peaks
+					row[32] = re.sub('(\\d{2}:\\d{2}:\\d{2} -> [.0-9]+) ', '\\1<br/>', row[32])  #Number of tasks currently blocked
+					row[33] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[33])					#IPC facilities (MQueues-SMemory-SArrays)
+					row[34] = re.sub('(\\d+ \\w+) ', '\\1<br/>', row[34])					#Process by User
+					row[35] = re.sub('([^ ]+ MB [^ ]+) ', '\\1<br/>', row[35])                   #Procs w/higher MEM consumption
 				except IndexError:
 					pass
 

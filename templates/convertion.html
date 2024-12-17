@@ -60,7 +60,7 @@
         border: 1px solid transparent;
         position: relative;
         display: -webkit-box;
-		-webkit-line-clamp: 8; /* number of lines to show */
+		-webkit-line-clamp: 6; /* number of lines to show */
         line-clamp: 8; 
 		-webkit-box-orient: vertical;
         height: 50%;
@@ -68,6 +68,17 @@
         overflow-y: scroll;
         //overflow-x: scroll;
         //overflow: auto;
+      }
+      .card-scroll-x {
+        border: 1px solid transparent;
+        position: relative;
+        //display: -webkit-box;
+		//-webkit-line-clamp: 6; /* number of lines to show */
+        //line-clamp: 6; 
+		//-webkit-box-orient: horizontal;
+        height: 100%;
+        width: 100%;
+        overflow-x: scroll;
       }
 
       @media (min-width: 768px) {
@@ -219,22 +230,29 @@
 
     <div class="card-group" style="margin-left: 1%; margin-right: 1%">
       <div class="row"> <!--Memory Peak Highest %-->
-        {% for column in range(15, 32) %}
+        {% for column in range(15, 36) %}
           <div class="col-sm-3">
             <div class="card" style="width: 20rem;">
               <div class="card-body">
                 <h5 class="card-title">{{csvlist[0][column]}}</h5>
-                {% if column > 14 and column < 21 %}
+                {% if column > 14 and column < 17 %}
                 <div class="card-text">
-                  <td>{{ csvlist[i][column] | safe }}%</td>
+                  <td>{{ csvlist[i][column] | safe }}%</td><!--percentages-->
                 </div>
-				{% elif column == 21 %}
+				{% elif column >= 17 and column <= 18 %}
                 <div class="card-text">
-                  <!--td>{{ csvlist[i][column] | safe }}</td-->
-				  <td><p class="text-muted mb-0">{{ csvlist[i][column] | safe }}</p>
+				  <td>{{ csvlist[i][column] | safe }}GB</td>
                 </div>
-				{% elif column == 28 %}
+				{% elif column >= 19 and column <= 22 %}
+                <div class="card-text">
+				  <td>{{ csvlist[i][column] | safe }}%</td>
+                </div>
+				{% elif column == 32 %}
                 <div class="card-scroll card-text">
+                  <td>{{ csvlist[i][column] | safe }}</td>
+                </div>
+				{% elif column == 35 %}
+                <div class="card-scroll-x card-text">
                   <td>{{ csvlist[i][column] | safe }}</td>
                 </div>
                 {% else %}

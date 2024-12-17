@@ -201,30 +201,39 @@
     <main role="main">
       <div class="jumbotron">
         <div class="container">
-          <!-- Name server -->
-          <h1 class="display-4">{{csvlist[i][0]}}</h1>
-          <p>{{csvlist[i][1]}} {{csvlist[i][2]}} <b>IPs: </b>{{csvlist[i][3]}}</p>
+          <div class="row">
+            <div class="col">
+              <h1 class="display-4">{{csvlist[i][0]}}</h1>
+              <p>{{csvlist[i][1]}} {{csvlist[i][2]}} <b>IPs: </b>{{csvlist[i][3]}}</p>
+            </div>
+            <div class="col">
+              <p><small class="text-muted">{{csvlist[0][4]}} <b>{{csvlist[i][4]}}</b> {{csvlist[0][5]}} <b>{{csvlist[i][5]}}</b> {{csvlist[0][6]}} <b>{{csvlist[i][6]}}</b> {{csvlist[0][7]}} <b>{{csvlist[i][7]}}</b> {{csvlist[0][8]}} <b>{{csvlist[i][8]}}</b></small></p>
+              <p><small class="text-muted">{{csvlist[0][9]}} <b>{{csvlist[i][9]}}</b> {{csvlist[0][10]}} <b>{{csvlist[i][10]}}</b></small></br>
+              <small class="text-muted">{{csvlist[0][11]}} <b>{{csvlist[i][11]}}</b></small></p>
+              <p><small class="text-muted">{{csvlist[0][12]}} <b>{{csvlist[i][12]}}</b> {{csvlist[0][13]}} <b>{{csvlist[i][13]}}</b> {{csvlist[0][14]}} <b>{{csvlist[i][14]}}</b></small></p>
+            </div>
+          </div>
         </div>
       </div>
     </main>
 
     <div class="card-group" style="margin-left: 1%; margin-right: 1%">
-      <div class="row">
-        {% for column in range(4, 21) %}
+      <div class="row"> <!--Memory Peak Highest %-->
+        {% for column in range(15, 32) %}
           <div class="col-sm-3">
             <div class="card" style="width: 20rem;">
               <div class="card-body">
                 <h5 class="card-title">{{csvlist[0][column]}}</h5>
-                {% if column > 3 and column < 10 %}
+                {% if column > 14 and column < 21 %}
                 <div class="card-text">
                   <td>{{ csvlist[i][column] | safe }}%</td>
                 </div>
-				{% elif column == 10 %}
+				{% elif column == 21 %}
                 <div class="card-text">
                   <!--td>{{ csvlist[i][column] | safe }}</td-->
 				  <td><p class="text-muted mb-0">{{ csvlist[i][column] | safe }}</p>
                 </div>
-				{% elif column == 17 %}
+				{% elif column == 28 %}
                 <div class="card-scroll card-text">
                   <td>{{ csvlist[i][column] | safe }}</td>
                 </div>

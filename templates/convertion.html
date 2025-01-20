@@ -71,6 +71,19 @@
         //overflow-x: scroll;
         //overflow: auto;
       }
+      .card-scroll-net {
+        border: 1px solid transparent;
+        position: relative;
+        display: -webkit-box;
+		-webkit-line-clamp: 10; /* number of lines to show */
+        line-clamp: 12; 
+		-webkit-box-orient: vertical;
+        height: 50%;
+        width: 100%;
+        overflow-y: scroll;
+        //overflow-x: scroll;
+        //overflow: auto;
+      }
       .card-scroll-x {
         border: 1px solid transparent;
         position: relative;
@@ -236,7 +249,7 @@
 
     <div class="card-group" style="margin-left: 1%; margin-right: 1%">
       <div class="row"> <!--Memory Peak Highest %-->
-        {% for column in range(15, 36) %}
+        {% for column in range(15, 37) %}
           <div class="col-sm-3">
             <div class="card" style="width: 20rem;">
               <div class="card-body">
@@ -262,6 +275,10 @@
                   <td>{{ csvlist[i][column] | safe }}</td>
                 </div>
 				{% elif column == 35 %}
+                <div class="card-scroll-net card-text">
+                  <td>{{ csvlist[i][column] | safe }}</td>
+                </div>
+				{% elif column == 36 %}
                 <div class="card-scroll-x card-text">
                   <td>{{ csvlist[i][column] | safe }}</td>
                 </div>
